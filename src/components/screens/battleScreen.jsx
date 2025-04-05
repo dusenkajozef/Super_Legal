@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-//import MessageBox from '../messageBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AngelImage from "../../images/Angel.png";
 import DevilImage from "../../images/Devil.png";
@@ -50,16 +49,42 @@ export default function BattleScreen() {
                         </div>
                     )}
                 </Col>
-                <Col xs={12} md={2} className="d-flex justify-content-center align-items-center">
-                <Button
+
+                {/* Angel image, Battle button, and Devil image in the middle */}
+                <Col xs={12} md={4} className="d-flex justify-content-center align-items-center">
+                    {/* Angel image on the left */}
+                    <img
+                        src={AngelImage}
+                        alt="Angel"
+                        style={{
+                            maxWidth: '100%', 
+                            height: 'auto',  
+                            maxHeight: '100px', 
+                        }}
+                    />
+
+                    <Button
                     variant={areAIsBattling ? 'danger' : 'success'}
                     onClick={handleStartBattleClick}
                     className="mb-4"
                     disabled = {areAIsBattling ? true : false}
                 >
-                    {areAIsBattling ? 'Battleing' : 'Start Battle'}
-                </Button>
+                    {areAIsBattling ? 'Battling' : 'Start Battle'}
+                    </Button>
+
+                    {/* Devil image on the right */}
+                    <img
+                        src={DevilImage}
+                        alt="Devil"
+                        style={{
+                            maxWidth: '100%', 
+                            height: 'auto', 
+                            maxHeight: '100px', 
+                        }}
+                    />
                 </Col>
+
+                {/* First bad message */}
                 <Col xs={12} md={4} className="d-flex justify-content-end">
                     {badMessages.length > 0 && (
                         <div className="p-3 rounded-3 bg-danger text-white">
