@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import MessageBox from '../messageBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AngelImage from "../../images/Angel.png";
+import DevilImage from "../../images/Devil.png";
 
 export default function BattleScreen() {
     const prompt = useSelector((state) => state.prompt.prompt);
@@ -40,6 +42,22 @@ export default function BattleScreen() {
             <Col md={6}>
               <MessageBox title="Bad Messages" messages={badMessages} />
             </Col>
+          </Row>
+          <Row>
+            <Col md={3}>
+              <img src= {AngelImage} alt="" width="200" height="200" style={{
+                marginLeft: '200px',   // Setting margin of 20px on all sides
+                display: 'block', // Make image block to allow centering
+              }}/>
+            </Col>
+
+            <Col md={3}>
+              <img src= {DevilImage} alt="" width="200" height="200" style={{
+                marginLeft: '500px',   // Setting margin of 20px on all sides
+                display: 'block', // Make image block to allow centering
+              }}/>
+            </Col>
+
           </Row>
         </Container>
     );
