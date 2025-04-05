@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 //import MessageBox from '../messageBox';
@@ -20,13 +20,20 @@ export default function BattleScreen() {
 
     const dispatch = useDispatch();
 
-    const handleStartBattleClick =  async () => {
-        setAreAIsBattling(!areAIsBattling);
-        const goodBattleResponse = await apiGetBattleGoodMessage(prompt, goodMessages, badMessages)
-        dispatch(addGoodMessage(goodBattleResponse.response))
-        const badBattleResponse = await apiGetBattleBadMessage(prompt, goodMessages, badMessages)
-        dispatch(addBadMessage(badBattleResponse.response))
-    }
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+
+    const handleStartBattleClick = async () => {
+      setAreAIsBattling(true);
+      for(let i = 0; i < 4; i++) {
+        const goodBattleResponse = await apiGetBattleGoodMessage(prompt, goodMessages, badMessages);
+        dispatch(addGoodMessage(goodBattleResponse.response));
+        await sleep(1000);
+        const badBattleResponse = await apiGetBattleBadMessage(prompt, goodMessages, badMessages);
+        dispatch(addBadMessage(badBattleResponse.response));
+      }
+      setAreAIsBattling(false);
+    };
 
     return (
         <Container className="my-4 position-relative">
@@ -43,41 +50,16 @@ export default function BattleScreen() {
                         </div>
                     )}
                 </Col>
-
-                {/* Angel image, Battle button, and Devil image in the middle */}
-                <Col xs={12} md={4} className="d-flex justify-content-center align-items-center">
-                    {/* Angel image on the left */}
-                    <img
-                        src={AngelImage}
-                        alt="Angel"
-                        style={{
-                            maxWidth: '100%', 
-                            height: 'auto',  
-                            maxHeight: '100px', 
-                        }}
-                    />
-
-                    <Button
-                        variant={areAIsBattling ? 'danger' : 'success'}
-                        onClick={handleStartBattleClick}
-                        className="mb-4 mx-3"
-                    >
-                        {areAIsBattling ? 'End Battle' : 'Start Battle'}
-                    </Button>
-
-                    {/* Devil image on the right */}
-                    <img
-                        src={DevilImage}
-                        alt="Devil"
-                        style={{
-                            maxWidth: '100%', 
-                            height: 'auto', 
-                            maxHeight: '100px', 
-                        }}
-                    />
+                <Col xs={12} md={2} className="d-flex justify-content-center align-items-center">
+                <Button
+                    variant={areAIsBattling ? 'danger' : 'success'}
+                    onClick={handleStartBattleClick}
+                    className="mb-4"
+                    disabled = {areAIsBattling ? true : false}
+                >
+                    {areAIsBattling ? 'Battleing' : 'Start Battle'}
+                </Button>
                 </Col>
-
-                {/* First bad message */}
                 <Col xs={12} md={4} className="d-flex justify-content-end">
                     {badMessages.length > 0 && (
                         <div className="p-3 rounded-3 bg-danger text-white">
