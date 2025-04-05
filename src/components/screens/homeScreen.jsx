@@ -6,16 +6,28 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Logo from "../../images/Logo.png"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { apigetGoodMessage } from '../../services/goodMessagesService';
+import { addGoodMessage } from '../../redux/goodMessagesSlice';
+import { apigetBadMessage } from '../../services/badMessagesService';
+import { addBadMessage } from '../../redux/badMessagesSlice';
 
 export default function HomeScreen() {
   const [inputValue, setInputValue] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleButtonClick = async () => {
-    const response = await apigetGoodMessage()
-    console.log(response.response)
+    setLoading(true);
     dispatch(setPrompt(inputValue));
+    const [goodResponse, badResponse] = await Promise.all([
+        apigetGoodMessage(inputValue),
+        apigetBadMessage(inputValue),
+      ]);
+    console.log(goodResponse.response);
+    console.log(badResponse.response);
+    dispatch(addGoodMessage(goodResponse.response));
+    dispatch(addBadMessage(badResponse.response));
+
     navigate('/battle');
   };
 

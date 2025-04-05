@@ -12,11 +12,11 @@ const apiClient = axios.create({
 });
 
 // Exported function to call /chat
-export const apigetGoodMessage = async (prompt) => {
+export const apigetBadMessage = async (prompt) => {
   try {
     // Define request body
     const messages = {
-      persona: "angel",
+      persona: "devil",
       history: [{ role: "user", content: prompt }],
     };
     const response = await apiClient.post("/chat", messages);
