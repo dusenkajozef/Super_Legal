@@ -5,13 +5,16 @@ import { setPrompt } from '../../redux/promptSlice';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Logo from "../../images/Logo.png"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { apigetGoodMessage } from '../../services/goodMessagesService';
 
 export default function HomeScreen() {
   const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
+    const response = await apigetGoodMessage()
+    console.log(response.response)
     dispatch(setPrompt(inputValue));
     navigate('/battle');
   };
