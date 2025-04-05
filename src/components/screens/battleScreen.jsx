@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import MessageBox from '../messageBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function BattleScreen() {
@@ -33,25 +34,11 @@ export default function BattleScreen() {
     
           <Row>
             <Col md={6}>
-              <h3>Good Messages</h3>
-              <div className="border p-3 mb-3" style={{ minHeight: '200px', overflowY: 'auto' }}>
-                <ListGroup>
-                  {goodMessages.map((message, index) => (
-                    <ListGroup.Item key={index}>{message}</ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </div>
+              <MessageBox title="Good Messages" messages={goodMessages} />
             </Col>
     
             <Col md={6}>
-              <h3>Bad Messages</h3>
-              <div className="border p-3 mb-3" style={{ minHeight: '200px', overflowY: 'auto' }}>
-                <ListGroup>
-                  {badMessages.map((message, index) => (
-                    <ListGroup.Item key={index}>{message}</ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </div>
+              <MessageBox title="Bad Messages" messages={badMessages} />
             </Col>
           </Row>
         </Container>
