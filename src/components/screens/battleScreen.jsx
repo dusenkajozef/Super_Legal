@@ -36,7 +36,6 @@ export default function BattleScreen() {
 
     return (
         <Container className="my-4 position-relative">
-            {/* First good message */}
             <div className="mb-4">
                 <h3>Current Prompt:</h3>
                 <p>{prompt}</p>
@@ -50,9 +49,7 @@ export default function BattleScreen() {
                     )}
                 </Col>
 
-                {/* Angel image, Battle button, and Devil image in the middle */}
                 <Col xs={12} md={4} className="d-flex justify-content-center align-items-center">
-                    {/* Angel image on the left */}
                     <img
                         src={AngelImage}
                         alt="Angel"
@@ -72,7 +69,6 @@ export default function BattleScreen() {
                     {areAIsBattling ? 'Battling' : 'Start Battle'}
                     </Button>
 
-                    {/* Devil image on the right */}
                     <img
                         src={DevilImage}
                         alt="Devil"
@@ -84,7 +80,6 @@ export default function BattleScreen() {
                     />
                 </Col>
 
-                {/* First bad message */}
                 <Col xs={12} md={4} className="d-flex justify-content-end">
                     {badMessages.length > 0 && (
                         <div className="p-3 rounded-3 bg-danger text-white">

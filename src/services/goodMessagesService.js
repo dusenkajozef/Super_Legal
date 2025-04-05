@@ -2,7 +2,6 @@ import axios from "axios";
 
 const BASE_URL = "http://3.147.170.228";
 
-// Configure Axios instance
 const apiClient = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -10,7 +9,6 @@ const apiClient = axios.create({
   },
 });
 
-// Exported function to call /chat
 export const apiGetInitialGoodMessage = async (prompt) => {
   try {
     // Define request body
