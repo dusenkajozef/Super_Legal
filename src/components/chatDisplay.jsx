@@ -12,7 +12,7 @@ export default function ChatDisplay() {
   const maxMessagesLength = Math.max(goodBattleMessagesSlice.length, badBattleMessagesSlice.length);
 
   return (
-    <Container className="my-4 border border-secondary border-3 p-3 rounded" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+    <Container className="my-4 border border-secondary border-3 p-3 rounded" style={{ height: '50vh', overflowY: 'auto' }}>
       {Array.from({ length: maxMessagesLength }).map((_, index) => {
         const goodMessage = goodBattleMessagesSlice[index];
         const badMessage = badBattleMessagesSlice[index];

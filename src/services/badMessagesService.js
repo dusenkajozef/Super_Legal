@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// Add http:// and ensure it's the full URL
-const BASE_URL = "http://3.137.151.60"; // include port if needed (e.g. :5000)
+const BASE_URL = "http://3.147.170.228";
 
 // Configure Axios instance
 const apiClient = axios.create({
