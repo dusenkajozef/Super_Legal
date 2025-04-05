@@ -38,19 +38,23 @@ export default function HomeScreen() {
   };
 
   return (
-    <Container className="mt-5">
+    <Container
+      fluid
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: '100vh' }}
+    >
       <Row>
-        <Col xs={12} md={8} lg={6} className="mx-auto">
-          <h1 className="text-center mb-4">Welcome to the Home Screen</h1>
+        <Col xs={12} md={8} lg={8} >
+          <h1 className="text-center mb-4">Welcome to Super Legal</h1>
 
           <Form>
-            <Form.Group controlId="formPromptInput" className="mb-3">
-              <Form.Label>Enter something</Form.Label>
+            <Form.Group controlId="formPromptInput" className="mb-3 w-100">
+              <Form.Label>Enter the question</Form.Label>
               <Form.Control
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Enter something"
+                placeholder="Type here..."
               />
             </Form.Group>
 
