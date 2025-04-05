@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function BattleScreen() {
@@ -14,40 +15,45 @@ export default function BattleScreen() {
     }
 
     return (
-        <div className="battle-screen">
-          <h2>Battle Screen</h2>
-    
-          <div className="prompt-container">
+        <Container className="my-4">
+          <h2 className="text-center mb-4">Battle Screen</h2>
+          
+          <div className="mb-4">
             <h3>Current Prompt:</h3>
             <p>{prompt}</p>
           </div>
     
-          <button
-            className={`btn ${areAIsBattling ? 'btn-danger' : 'btn-success'}`}
+          <Button
+            variant={areAIsBattling ? 'danger' : 'success'}
             onClick={handleStartBattleClick}
+            className="mb-4"
           >
             {areAIsBattling ? 'End Battle' : 'Start Battle'}
-          </button>
+          </Button>
     
-
-          <div className="message-container">
-            <div className="left-chat">
+          <Row>
+            <Col md={6}>
               <h3>Good Messages</h3>
-              <ul>
-                {goodMessages.map((message, index) => (
-                  <li key={index}>{message}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="right-chat">
+              <div className="border p-3 mb-3" style={{ minHeight: '200px', overflowY: 'auto' }}>
+                <ListGroup>
+                  {goodMessages.map((message, index) => (
+                    <ListGroup.Item key={index}>{message}</ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+            </Col>
+    
+            <Col md={6}>
               <h3>Bad Messages</h3>
-              <ul>
-                {badMessages.map((message, index) => (
-                  <li key={index}>{message}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      );
+              <div className="border p-3 mb-3" style={{ minHeight: '200px', overflowY: 'auto' }}>
+                <ListGroup>
+                  {badMessages.map((message, index) => (
+                    <ListGroup.Item key={index}>{message}</ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+    );
 }
