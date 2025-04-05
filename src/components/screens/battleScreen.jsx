@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import MessageBox from '../messageBox';
+//import MessageBox from '../messageBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AngelImage from "../../images/Angel.png";
 import DevilImage from "../../images/Devil.png";
@@ -9,6 +9,7 @@ import { apiGetBattleGoodMessage } from '../../services/goodMessagesService';
 import { apiGetBattleBadMessage } from '../../services/badMessagesService';
 import { addGoodMessage } from '../../redux/goodMessagesSlice';
 import { addBadMessage } from '../../redux/badMessagesSlice';
+import ChatDisplay from '../chatDisplay';
 
 export default function BattleScreen() {
     const prompt = useSelector((state) => state.prompt.prompt);
@@ -45,14 +46,12 @@ export default function BattleScreen() {
           </Button>
     
           <Row>
-            <Col md={6}>
-              <MessageBox title="Good Messages" messages={goodMessages} />
-            </Col>
-    
-            <Col md={6}>
-              <MessageBox title="Bad Messages" messages={badMessages} />
+            <Col md={12}>
+            <h4>Battle Chat</h4>
+            <ChatDisplay />
             </Col>
           </Row>
+
           <Row>
           <div className="d-flex justify-content-center">
 
