@@ -16,7 +16,8 @@ export default function HomeScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = async (e) => {
+    e.preventDefault()
     setLoading(true);
     try{
         dispatch(setPrompt(inputValue));
@@ -24,8 +25,6 @@ export default function HomeScreen() {
             apiGetInitialGoodMessage(inputValue),
             apiGetInitialBadMessage(inputValue),
         ]);
-        console.log(goodResponse.response);
-        console.log(badResponse.response);
         dispatch(addGoodMessage(goodResponse.response));
         dispatch(addBadMessage(badResponse.response));
 
@@ -47,7 +46,7 @@ export default function HomeScreen() {
         <Col xs={12} md={8} lg={8} >
           <h1 className="text-center mb-4">Welcome to Super Legal</h1>
 
-          <Form>
+          <Form onSubmit={handleButtonClick}>
             <Form.Group controlId="formPromptInput" className="mb-3 w-100">
               <Form.Label>Enter the question</Form.Label>
               <Form.Control
@@ -60,9 +59,9 @@ export default function HomeScreen() {
 
             <Button
               variant="primary"
-              onClick={handleButtonClick}
               className="w-100"
               disabled={loading}
+              type="submit"
             >
               {loading ? (
                 <>
