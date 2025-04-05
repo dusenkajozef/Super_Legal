@@ -44,20 +44,21 @@ export default function BattleScreen() {
             </Col>
           </Row>
           <Row>
-            <Col md={3}>
+          <div className="d-flex justify-content-center">
+
+            <div className="container d-flex justify-content-center">
               <img src= {AngelImage} alt="" width="200" height="200" style={{
-                marginLeft: '200px',   // Setting margin of 20px on all sides
                 display: 'block', // Make image block to allow centering
               }}/>
-            </Col>
+            </div>
 
-            <Col md={3}>
+            <div className="container d-flex justify-content-center">
               <img src= {DevilImage} alt="" width="200" height="200" style={{
-                marginLeft: '500px',   // Setting margin of 20px on all sides
                 display: 'block', // Make image block to allow centering
               }}/>
-            </Col>
-
+            </div>
+          </div>
+            
           </Row>
         </Container>
     );
