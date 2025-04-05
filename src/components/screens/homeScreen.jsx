@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setPrompt } from '../../redux/promptSlice';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Spinner } from 'react-bootstrap';
 import Logo from "../../images/Logo.png"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { apigetGoodMessage } from '../../services/goodMessagesService';
@@ -18,17 +18,23 @@ export default function HomeScreen() {
 
   const handleButtonClick = async () => {
     setLoading(true);
-    dispatch(setPrompt(inputValue));
-    const [goodResponse, badResponse] = await Promise.all([
-        apigetGoodMessage(inputValue),
-        apigetBadMessage(inputValue),
-      ]);
-    console.log(goodResponse.response);
-    console.log(badResponse.response);
-    dispatch(addGoodMessage(goodResponse.response));
-    dispatch(addBadMessage(badResponse.response));
+    try{
+        dispatch(setPrompt(inputValue));
+        const [goodResponse, badResponse] = await Promise.all([
+            apigetGoodMessage(inputValue),
+            apigetBadMessage(inputValue),
+        ]);
+        console.log(goodResponse.response);
+        console.log(badResponse.response);
+        dispatch(addGoodMessage(goodResponse.response));
+        dispatch(addBadMessage(badResponse.response));
 
-    navigate('/battle');
+        navigate('/battle');
+    } catch (error) {
+        console.error("Error fetching messages", error);
+    } finally {
+        setLoading(false);
+    }
   };
 
   return (
@@ -48,8 +54,27 @@ export default function HomeScreen() {
               />
             </Form.Group>
 
-            <Button variant="primary" onClick={handleButtonClick} className="w-100">
-              Submit
+            <Button
+              variant="primary"
+              onClick={handleButtonClick}
+              className="w-100"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className="me-2"
+                  />
+                  Loading...
+                </>
+              ) : (
+                'Submit'
+              )}
             </Button>
           </Form>
         </Col>
