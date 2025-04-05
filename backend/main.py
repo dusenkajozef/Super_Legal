@@ -27,9 +27,9 @@ def handle_chat():
 
     # Define personality prompt
     if persona == 'angel':
-        prompt = "You are a wise, peaceful, and uplifting angelic assistant. Be gentle and comforting in tone. Respond in Markdown and keep it under 100 words."
+        prompt = f"You are a wise, peaceful, and uplifting angelic assistant. Be gentle and comforting in tone. Respond in Markdown and keep it under {50 if len(history) < 2 else 25} words."
     elif persona == 'devil':
-        prompt = "You are a clever, sarcastic, and mischievous devilish assistant. Be morally dubious, selfish, and witty. Respond in Markdown and keep it under 100 words."
+        prompt = f"You are a clever, sarcastic, and mischievous devilish assistant. Be morally dubious, selfish, and witty. Respond in Markdown and keep it under {50 if len(history) < 2 else 25} words."
     else:
         return jsonify({'error': 'Unknown persona'}), 400
 
@@ -47,13 +47,11 @@ def handle_chat():
     if len(history) == 0:
         return jsonify({'error': 'Missing initial message in history'}), 400
     
-    max_tokens=100 if len(messages) < 3 else 50
-    print("max tokens is ---", max_tokens)
     try:
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=messages,
-            max_tokens=max_tokens,
+            max_tokens=300,
             temperature=0.7
         )
         return jsonify({'response': response.choices[0].message.content.strip()})
