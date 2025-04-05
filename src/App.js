@@ -4,8 +4,11 @@ import HomeScreen from "./components/screens/homeScreen";
 import BattleScreen from "./components/screens/battleScreen";
 
 function App() {
+  const appStyle = {
+    backgroundColor: "#f5f5f5", // Light gray color
+  };
   return (
-    <div className="App">
+    <div className="App" style={appStyle}>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomeScreen />} />
