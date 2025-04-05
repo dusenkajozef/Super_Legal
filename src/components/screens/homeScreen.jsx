@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setPrompt } from '../../redux/promptSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function HomeScreen() {
   const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleButtonClick = () => {
-    alert(`You entered: ${inputValue}`);
+    dispatch(setPrompt(inputValue));
+    navigate('/battle');
   };
 
   return (
