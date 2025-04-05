@@ -44,7 +44,7 @@ export default function HomeScreen() {
     >
       <Row>
         <Col xs={12} md={8} lg={8} >
-          <h1 className="text-center mb-4">Welcome to Super Legal</h1>
+          <h1 className="text-center mb-4">Welcome to <strong>SuperLegal</strong></h1>
 
           <Form onSubmit={handleButtonClick}>
             <Form.Group controlId="formPromptInput" className="mb-3 w-100">
