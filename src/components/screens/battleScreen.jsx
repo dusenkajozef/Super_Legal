@@ -29,62 +29,69 @@ export default function BattleScreen() {
     }
 
     return (
-        <Container className="my-4">          
-          <div className="mb-4">
-            <h3>Current Prompt:</h3>
-            <p>{prompt}</p>
-          </div>
-    
-          <Row className="mb-3">
-                <Col xs={12} md={5} className="d-flex justify-content-start">
-                {goodMessages.length > 0 && (
-                    <div className="p-3 rounded-3 bg-warning text-dark w-75">
-                    {goodMessages[0]}
-                    </div>
-                )}
+        <Container className="my-4 position-relative">
+            {/* First good message */}
+            <div className="mb-4">
+                <h3>Current Prompt:</h3>
+                <p>{prompt}</p>
+            </div>
+            <Row className="mb-3">
+                <Col xs={12} md={4} className="d-flex justify-content-start">
+                    {goodMessages.length > 0 && (
+                        <div className="p-3 rounded-3 bg-warning text-dark">
+                            {goodMessages[0]}
+                        </div>
+                    )}
                 </Col>
 
-                <Col xs={12} md={2} className="d-flex justify-content-center align-items-center">
-                <Button
-                    variant={areAIsBattling ? 'danger' : 'success'}
-                    onClick={handleStartBattleClick}
-                    className="mb-4"
-                >
-                    {areAIsBattling ? 'End Battle' : 'Start Battle'}
-                </Button>
+                {/* Angel image, Battle button, and Devil image in the middle */}
+                <Col xs={12} md={4} className="d-flex justify-content-center align-items-center">
+                    {/* Angel image on the left */}
+                    <img
+                        src={AngelImage}
+                        alt="Angel"
+                        style={{
+                            maxWidth: '100%', 
+                            height: 'auto',  
+                            maxHeight: '100px', 
+                        }}
+                    />
+
+                    <Button
+                        variant={areAIsBattling ? 'danger' : 'success'}
+                        onClick={handleStartBattleClick}
+                        className="mb-4 mx-3"
+                    >
+                        {areAIsBattling ? 'End Battle' : 'Start Battle'}
+                    </Button>
+
+                    {/* Devil image on the right */}
+                    <img
+                        src={DevilImage}
+                        alt="Devil"
+                        style={{
+                            maxWidth: '100%', 
+                            height: 'auto', 
+                            maxHeight: '100px', 
+                        }}
+                    />
                 </Col>
 
-                <Col xs={12} md={5} className="d-flex justify-content-end">
-                {badMessages.length > 0 && (
-                    <div className="p-3 rounded-3 bg-danger text-white w-75">
-                    {badMessages[0]}
-                    </div>
-                )}
+                {/* First bad message */}
+                <Col xs={12} md={4} className="d-flex justify-content-end">
+                    {badMessages.length > 0 && (
+                        <div className="p-3 rounded-3 bg-danger text-white">
+                            {badMessages[0]}
+                        </div>
+                    )}
                 </Col>
             </Row>
-          <Row>
-            <Col md={12}>
-            <ChatDisplay />
-            </Col>
-          </Row>
 
-          <Row>
-          <div className="d-flex justify-content-center">
-
-            <div className="container d-flex justify-content-center">
-              <img src= {AngelImage} alt="" width="200" height="200" style={{
-                display: 'block', // Make image block to allow centering
-              }}/>
-            </div>
-
-            <div className="container d-flex justify-content-center">
-              <img src= {DevilImage} alt="" width="200" height="200" style={{
-                display: 'block', // Make image block to allow centering
-              }}/>
-            </div>
-          </div>
-            
-          </Row>
+            <Row>
+                <Col md={12}>
+                    <ChatDisplay />
+                </Col>
+            </Row>
         </Container>
     );
 }
