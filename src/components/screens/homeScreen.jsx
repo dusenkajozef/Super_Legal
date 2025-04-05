@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setPrompt } from '../../redux/promptSlice';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import Logo from "../../images/Logo.png"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function HomeScreen() {
@@ -37,7 +38,9 @@ export default function HomeScreen() {
             </Button>
           </Form>
         </Col>
+        
       </Row>
+      <img src= {Logo} alt="" width="200" height="200"/>
     </Container>
   );
 }
