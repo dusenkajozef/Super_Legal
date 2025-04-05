@@ -29,9 +29,7 @@ export default function BattleScreen() {
     }
 
     return (
-        <Container className="my-4">
-          <h2 className="text-center mb-4">Battle Screen</h2>
-          
+        <Container className="my-4">          
           <div className="mb-4">
             <h3>Current Prompt:</h3>
             <p>{prompt}</p>
