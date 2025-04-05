@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import MessageBox from '../messageBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AngelImage from "../../images/Angel.png";
 import DevilImage from "../../images/Devil.png";
+import { apiGetBattleGoodMessage } from '../../services/goodMessagesService';
+import { apiGetBattleBadMessage } from '../../services/badMessagesService';
+import { addGoodMessage } from '../../redux/goodMessagesSlice';
+import { addBadMessage } from '../../redux/badMessagesSlice';
 
 export default function BattleScreen() {
     const prompt = useSelector((state) => state.prompt.prompt);
@@ -13,8 +17,14 @@ export default function BattleScreen() {
 
     const [areAIsBattling, setAreAIsBattling] = useState(false);
 
-    const handleStartBattleClick = () => {
+    const dispatch = useDispatch();
+
+    const handleStartBattleClick =  async () => {
         setAreAIsBattling(!areAIsBattling);
+        const goodBattleResponse = await apiGetBattleGoodMessage(prompt, goodMessages, badMessages)
+        dispatch(addGoodMessage(goodBattleResponse.response))
+        const badBattleResponse = await apiGetBattleBadMessage(prompt, goodMessages, badMessages)
+        dispatch(addBadMessage(badBattleResponse.response))
     }
 
     return (

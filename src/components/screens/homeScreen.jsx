@@ -5,9 +5,9 @@ import { setPrompt } from '../../redux/promptSlice';
 import { Container, Row, Col, Button, Form, Spinner } from 'react-bootstrap';
 import Logo from "../../images/Logo.png"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { apigetGoodMessage } from '../../services/goodMessagesService';
+import { apiGetInitialGoodMessage } from '../../services/goodMessagesService';
 import { addGoodMessage } from '../../redux/goodMessagesSlice';
-import { apigetBadMessage } from '../../services/badMessagesService';
+import { apiGetInitialBadMessage } from '../../services/badMessagesService';
 import { addBadMessage } from '../../redux/badMessagesSlice';
 
 export default function HomeScreen() {
@@ -21,8 +21,8 @@ export default function HomeScreen() {
     try{
         dispatch(setPrompt(inputValue));
         const [goodResponse, badResponse] = await Promise.all([
-            apigetGoodMessage(inputValue),
-            apigetBadMessage(inputValue),
+            apiGetInitialGoodMessage(inputValue),
+            apiGetInitialBadMessage(inputValue),
         ]);
         console.log(goodResponse.response);
         console.log(badResponse.response);
